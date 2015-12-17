@@ -7,10 +7,11 @@ services:
 
 env:
   global:
-    - APP_NAME=thawing-journey-6674
+    - APP_NAME=ruby-mongo
     - MONGOLAB_URI=mongodb://localhost/test
     - CI_REPORTS=shippable/testresults/results.xml COVERAGE_REPORTS=shippable/codecoverage
-    - secure: MRuHkLbL9HPkJPU5lzkKM1+NOq1S5RrhxEyhJkk60xxYiF7DMzydiBN8oFBjWrSmyGeGRuEC22a0I5ItobdWVszfcJCaXHwtfKzfGOUdKuyCnDgvojXhv/jrBvULyLK6zsLw3b8NMxdnwNsHqSPm19qW/EIGEl9Zv/637Igos69z9aT7+xrEG013+6HtKYb8RHm+iPSNsFoBi/RSAHYuM1eLTZWG2WAkjgzZaYmrHCgNwVmk+HOGR+TOWN7Iu5lrjyvC1XDCQrOvo1hZI30cd9OqJ5aadFm3exQpNhI4I7AgOnCbK3NoWNc/GAnqKXCvsaIQ80Jd/uLIOVyMjD6Xmg==
+    - secure: eFXOvsLreirVvLgYYPa6Y7CkPgX3mM+fJbHpkw9DJfPisXZTOcG9Lzq48dwnU7ByEQMXpZ42CaARLqCV68cIkyQzZwDgqHc5trQxuWJZRZaS/z7hFX8XvKtQxolrD9l8dFMCoXAVRTAqjMGvkiXzMQkmi8d47utxMiKZ+3Kaies4Sf5pZCLYAy3sjP4mWsm4gE14ATwnJJALws7q+NVgGrwR6frgXkC1G3Enh7vRX3iq9h3R/wu3wW92HQ2FaOlELHfAAxdcUqncKbEJpGMa/VKQjtyzjwwXWUqltNaZLRF8Cr/l5VsUrhYcow5VHXCJtsrhyDVkbBDc5vuIhiCYRA== 
+   # - secure: MRuHkLbL9HPkJPU5lzkKM1+NOq1S5RrhxEyhJkk60xxYiF7DMzydiBN8oFBjWrSmyGeGRuEC22a0I5ItobdWVszfcJCaXHwtfKzfGOUdKuyCnDgvojXhv/jrBvULyLK6zsLw3b8NMxdnwNsHqSPm19qW/EIGEl9Zv/637Igos69z9aT7+xrEG013+6HtKYb8RHm+iPSNsFoBi/RSAHYuM1eLTZWG2WAkjgzZaYmrHCgNwVmk+HOGR+TOWN7Iu5lrjyvC1XDCQrOvo1hZI30cd9OqJ5aadFm3exQpNhI4I7AgOnCbK3NoWNc/GAnqKXCvsaIQ80Jd/uLIOVyMjD6Xmg==
 
 before_install:
   - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
@@ -22,5 +23,8 @@ before_script:
 after_success:
   - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
   - git remote -v | grep ^heroku || heroku git:remote --ssh-git --app $APP_NAME
-  - git push -f heroku $BRANCH:master
-  - heroku run rake db:migrate
+  - git push -f heroku master
+#  - heroku run rake db:migrate
+
+#  - git push -f heroku $BRANCH:master
+#  - heroku run rake db:migrate
